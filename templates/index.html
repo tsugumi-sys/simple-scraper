@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang='ja'>
+<head>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <title>Scrape Blogs with Keyword</title>
+</head>
+<body>
+    <h1>Hello World</h1>
+    <h2>APIエンドポイント</h2>
+    <p>/v1</p>
+    <h2>クエリーパラメーター</h2>
+    <ul>
+        <li>search_kwd: スクレイピングで記事検索を行うときの検索キーワード。</li>
+        <li>relate_kwd: スクレイピングで取得した記事との関連性を見つけたいキーワード。</li>
+    </ul>
+    <h2>クエリ―でキーワードを指定</h2>
+    <p>/v1/?search_kwd=行政書士&search_kwd=税理士&search_kwd=弁護士?relate_kwd=遺産相続&relate_kwd=仮想通貨&relate_kwd=確定申告</p>
+    <h2>クエリ―なしの場合デフォルトキーワード(以下のクエリと同じ)</h2>
+    <p>/kwds/v1/?search_kwd=家族信託&search_kwd=行政書士&search_kwd=遺言?relate_kwd=家族信託&relate_kwd=行政書士&relate_kwd=遺言</p>
+    <h3>APIドキュメント</h3>
+    <a href="/docs">API Document</a>
+</body>
+</html>
