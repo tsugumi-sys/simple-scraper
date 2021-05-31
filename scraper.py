@@ -19,7 +19,7 @@ def scrape_ameba_blog(search_query=None):
     if search_query:
         kwds = search_query
     else:
-        kwds = ["行政書士", "民事信託", "相続"]
+        kwds = ["行政書士", "家族信託", "相続"]
     
     base_urls = []
     for kwd in kwds:
@@ -83,7 +83,7 @@ def scrape_note(kwds_param=None):
     if kwds_param:
         kwds = kwds_param
     else:
-        kwds = ["行政書士", "民事信託", "相続"]
+        kwds = ["行政書士", "家族信託", "相続"]
         
     base_urls = [f'https://note.com/search?q={kwd}&context=note&mode=search' for kwd in kwds]
     for kwd in kwds:

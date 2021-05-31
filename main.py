@@ -4,6 +4,7 @@ from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 import uvicorn
 import os
+import time
 
 from nlp_process import nlp_process
 from send_chat import send_chatwork
@@ -36,6 +37,7 @@ async def scrape_nlp(
     send_chatwork(f'[info][title]キーワードからブログ記事を抽出[/title][info][title]キーワード[/title]{kwds}[/info][/info]')
     for i in range(len(urls)):
         send_chatwork(f'[info][title]記事{i + 1}[/title]{urls[i]} \n\n{contents[i]}[/info]')
+        time.sleep(1)
         
     return result
 
