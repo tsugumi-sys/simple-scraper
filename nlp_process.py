@@ -3,6 +3,46 @@ import numpy as np
 from scraper import scrape_note, scrape_ameba_blog
 import spacy
 
+
+def make_text_data(search_query=None):
+    if search_query == None:
+        search_query = ["行政書士", "家族信託", "相続"]
+    content_df = pd.concat([scrape_ameba_blog(search_query), scrape_note(search_query)])
+    text = ''
+    for i in content_df["CONTENT"]:
+        text += i
+    with open('test.txt', 'w') as f:
+        f.write(text)
+    return {"status text": "OK"}
+
+def word_count():
+    # Load Data
+    with open('test.txt', 'r') as f:
+        text = f.read()
+    
+    # NLP Process
+    nlp = spacy.load("ja_core_news_sm")
+    doc = nlp(text)
+
+    # Word Count of Noun
+    word_count = {}
+    for token in doc:
+        part_of_speech = token.pos_
+        if part_of_speech == 'NOUN' and token.is_stop == False:
+            word_lemma = token.lemma_
+            current_count = word_count.get(word_lemma, 0)
+            current_count += 1
+            word_count[word_lemma] = current_count
+
+    return_word_count = {}
+    for key, val in word_count.items():
+        if val > 10:
+            return_word_count[key] = val
+    print(return_word_count)
+
+    return return_word_count
+
+
 # Parameter
 # ==================
 # a, b: word vector comes from spacy vector object
@@ -48,4 +88,4 @@ def nlp_process(search_query=None, kwds_query=None):
     }
 
 if __name__ == '__main__':
-    nlp_process()
+    word_count()

@@ -50,7 +50,10 @@ def scrape_ameba_blog(search_query=None):
     print(f'Ameblo: Find {len(urls)} urls')
     news_urls = []
     contents = []
-    for url in unique_urls:
+
+    end_point = 15
+
+    for url in unique_urls[:end_point]:
         res = requests.get(url, headers)
         if res.status_code == 200:
             soup = bs(res.content, 'html.parser')
@@ -111,7 +114,10 @@ def scrape_note(kwds_param=None):
     print(f'Note: Find {len(unique_urls)} urls')
     news_urls = []
     contents = []
-    for url in unique_urls:
+
+    end_point = 15
+
+    for url in unique_urls[:end_point]:
         res = requests.get('https://note.com' + url, headers)
         if res.status_code == 200:
             soup = bs(res.content, 'html.parser')

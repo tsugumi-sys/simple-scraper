@@ -6,7 +6,7 @@ import uvicorn
 import os
 import time
 
-from nlp_process import nlp_process
+from nlp_process import nlp_process, make_text_data, word_count
 from send_chat import send_chatwork
 
 app = FastAPI()
@@ -40,6 +40,21 @@ async def scrape_nlp(
         time.sleep(1)
         
     return result
+
+@app.get('/v1/make_data')
+async def create_wordcount_data(
+    search_kwd: Optional[List[str]] = Query(
+        None,
+        title="スクレイピングで取得した記事との関連性を見つけたいキーワード。",
+        description="与えられたキーワードでameba blog, noteの記事検索を行います。3つのキーワード指定で記事が200前後集まります。"
+    )
+):
+    return make_text_data(search_kwd)
+
+@app.get('/v1/word_count')
+async def get_wordCount():
+    return word_count()
+
 
 if __name__ == '__main__':
     uvicorn.run(app, host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
